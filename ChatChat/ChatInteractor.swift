@@ -37,8 +37,7 @@ class ChatInteractor: ChatBusinessLogic, ChatDataStore
   var chatWorker: ChatWorker? = ChatWorker(chatApi: FirebaseBackend())
     var senderDisplayName: String = ""
     var channel:Channel = Channel(id: "",name: "")
-    var senderId: String = LoginWorker(loginApi: FirebaseBackend()).currentUserId
-  // MARK: Do something
+    var senderId: String = LoginWorker(loginApi: FirebaseBackend()).senderId
     
     func setChatChannel(request: Chat.SelectedChannel.Request) -> Void {
         self.chatWorker?.setChatChannel(channelId: request.channelId)

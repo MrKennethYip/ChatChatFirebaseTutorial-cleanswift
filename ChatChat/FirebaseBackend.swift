@@ -27,15 +27,7 @@ class FirebaseBackend: BackendDatabaseProtocol {
     private var newMessageRefHandle: FIRDatabaseHandle?
     private var updatedMessageRefHandle: FIRDatabaseHandle?
     
-    var senderId: String!
-        
-    static var currentUser: String {
-        get {
-            return (FIRAuth.auth()?.currentUser?.uid)!
-        }
-    }
-    
-    var currentUserId: String {
+    var senderId: String {
         get {
             return (FIRAuth.auth()?.currentUser?.uid)!
         }
@@ -43,10 +35,6 @@ class FirebaseBackend: BackendDatabaseProtocol {
     
     static func configure() {
         FIRApp.configure()
-    }
-    
-    init() {
-        self.senderId = FIRAuth.auth()?.currentUser?.uid
     }
     
     deinit {
@@ -85,10 +73,6 @@ class FirebaseBackend: BackendDatabaseProtocol {
             }
         }
     }
-    
-//    func setChannel(_ channelId:String) {
-//        channelRef = allChannelsRef.child(channelId)
-//    }
     
     func setChatChannel(channelId:String) {
         channelRef = allChannelsRef.child(channelId)
@@ -131,7 +115,6 @@ class FirebaseBackend: BackendDatabaseProtocol {
             if let photoURL = messageData["photoURL"] as String! {
                 // The photo has been updated.
                 onPhotoChange(key, photoURL)
-//                self.fetchImageDataAtURL(photoURL: photoURL, key: key, completionHandler: {_ in})
             }
         })
         
@@ -206,7 +189,7 @@ class FirebaseBackend: BackendDatabaseProtocol {
         
         let messageItem = [
             "photoURL": imageURLNotSetKey,
-            "senderId": senderId!,
+            "senderId": senderId,
             ]
         
         itemRef.setValue(messageItem)
@@ -218,7 +201,7 @@ class FirebaseBackend: BackendDatabaseProtocol {
         
         let messageItem = [
             "photoURL": imageURLNotSetKey,
-            "senderId": senderId!,
+            "senderId": senderId,
             ]
         
         itemRef.setValue(messageItem)
@@ -231,7 +214,7 @@ class FirebaseBackend: BackendDatabaseProtocol {
         
         // 2
         let messageItem = [
-            "senderId": senderId!,
+            "senderId": senderId,
             "senderName": senderDisplayName,
             "text": text,
             ]

@@ -64,8 +64,8 @@ class ChannelListInteractor: ChannelListBusinessLogic, ChannelListDataStore
                     if (updatedChannel != nil) && self.addChannelToList(channel: updatedChannel!) {
                         let channels = ChannelList.FetchChannels.Response(channels: self.channels)
                         self.presenter?.presentUpdatedChannelList(response: channels)
-                    } else {
-                        //display error
+                    }
+                    if (updatedChannel == nil){
                         let response = ChannelList.Error.Response(errorMessage: "Could not create Channel")
                         self.presenter?.presentError(response: response)
                     }

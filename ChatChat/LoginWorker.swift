@@ -15,9 +15,9 @@ import UIKit
 class LoginWorker
 {
     var loginApi: LoginAPIProtocol
-    var currentUserId: String {
+    var senderId: String {
         get {
-            return loginApi.currentUserId
+            return loginApi.senderId
         }
     }
 
@@ -34,6 +34,6 @@ class LoginWorker
 }
 
 protocol LoginAPIProtocol {
-    var currentUserId: String {get}
+    var senderId: String {get}
     func signInAnonymously(onComplete: @escaping (Bool, BackendNetworkError?) -> Void)
 }
