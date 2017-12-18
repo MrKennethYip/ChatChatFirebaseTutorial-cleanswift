@@ -58,7 +58,7 @@ class LoginInteractorTests: XCTestCase
     }
     
     class LoginWorkerApiSpy: LoginAPIProtocol {
-        var currentUserId: String = "dummyId"
+        var senderId: String = "dummyId"
 
         func signInAnonymously(onComplete: @escaping (Bool, BackendNetworkError?) -> Void) {
             onComplete (true, nil)
